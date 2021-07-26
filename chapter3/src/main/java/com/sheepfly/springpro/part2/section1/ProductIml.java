@@ -3,7 +3,7 @@ package com.sheepfly.springpro.part2.section1;
 import org.example.beans.entity.Company;
 import org.example.beans.entity.User;
 
-public class ProductIml implements Product{
+public class ProductIml implements Product {
     private Company company;
     private User user;
 

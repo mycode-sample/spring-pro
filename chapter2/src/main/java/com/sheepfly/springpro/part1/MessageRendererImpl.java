@@ -1,6 +1,6 @@
 package com.sheepfly.springpro.part1;
 
-public class MessageRendererImpl implements MessageRenderer{
+public class MessageRendererImpl implements MessageRenderer {
     private MessageProvider messageProvider;
 
     @Override
@@ -12,12 +12,12 @@ public class MessageRendererImpl implements MessageRenderer{
     }
 
     @Override
-    public void setMessageProvider(MessageProvider messageProvider) {
-        this.messageProvider = messageProvider;
+    public MessageProvider getMessageProvider() {
+        return this.messageProvider;
     }
 
     @Override
-    public MessageProvider getMessageProvider() {
-        return this.messageProvider;
+    public void setMessageProvider(MessageProvider messageProvider) {
+        this.messageProvider = messageProvider;
     }
 }
