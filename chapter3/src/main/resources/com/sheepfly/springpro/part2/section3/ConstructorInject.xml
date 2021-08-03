@@ -1,0 +1,65 @@
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd">
+  <context:component-scan base-package="com.sheepfly.springpro.part2.section3.injects.demo3"/>
+  <bean class="com.sheepfly.springpro.part2.section3.injects.demo3.MessageProviderImpl"
+        id="messageProvider">
+    <constructor-arg value="hello,this is a demo."/>
+  </bean>
+
+  <bean id="c"
+        class="com.sheepfly.springpro.part2.section3.injects.demo3.MessageProviderImpl"
+        c:_0="user"
+        c:_1="company"
+        c:_2="haha"
+  />
+
+  <bean id="messageProvider2"
+        class="com.sheepfly.springpro.part2.section3.injects.demo3.MessageProviderImpl"
+        c:message="hello,this is c namespace"
+  />
+  <bean id="messageProvider3"
+        class="com.sheepfly.springpro.part2.section3.injects.demo3.MessageProviderImpl"
+  >
+    <constructor-arg
+        ref="user"/>
+    <constructor-arg
+        ref="company"/>
+  </bean>
+
+  <bean id="messageProvider4"
+        class="com.sheepfly.springpro.part2.section3.injects.demo3.MessageProviderImpl">
+    <constructor-arg index="0"
+                     ref="user"/>
+  </bean>
+  <bean id="messageProvider5"
+        class="com.sheepfly.springpro.part2.section3.injects.demo3.MessageProviderImpl">
+    <constructor-arg index="0"
+                     ref="company"/>
+  </bean>
+
+  <bean id="user"
+        class="org.example.beans.entity.User">
+    <property name="name"
+              value="zhangsan"/>
+  </bean>
+  <bean id="company"
+        class="org.example.beans.entity.Company">
+    <property name="name"
+              value="张三的公司"/>
+  </bean>
+
+  <bean id="unknownConstructor"
+        class="com.sheepfly.springpro.part2.section3.injects.demo3.UnknownConstructor">
+    <constructor-arg value="1"/>
+  </bean>
+  <bean id="unknownConstructor2"
+        class="com.sheepfly.springpro.part2.section3.injects.demo3.UnknownConstructor">
+    <constructor-arg value="1" type="int"/>
+  </bean>
+</beans>
