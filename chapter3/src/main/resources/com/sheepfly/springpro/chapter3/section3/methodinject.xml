@@ -1,0 +1,18 @@
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+  <bean id="product"
+        scope="prototype"
+        class="com.sheepfly.springpro.chapter3.section3.injects.methodinjects.Product"/>
+
+  <bean id="abstractMarket"
+        class="com.sheepfly.springpro.chapter3.section3.injects.methodinjects.AbstractMarket">
+    <lookup-method name="getProduct" bean="product"/>
+  </bean>
+
+  <bean id="market"
+        class="com.sheepfly.springpro.chapter3.section3.injects.methodinjects.MyMarket">
+    <property name="product" ref="product"/>
+  </bean>
+</beans>
