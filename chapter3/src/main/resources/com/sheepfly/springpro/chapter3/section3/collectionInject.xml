@@ -1,0 +1,68 @@
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/util
+        https://www.springframework.org/schema/spring-util.xsd">
+  <bean id="collection"
+        class="com.sheepfly.springpro.chapter3.section3.injects.demo3.CollectionBean">
+    <property name="map">
+      <map>
+        <entry key="name" value="zhangsan"/>
+        <entry key="gender" value="12"/>
+        <entry key="user">
+          <ref bean="user"/>
+        </entry>
+      </map>
+    </property>
+    <property name="list">
+      <list>
+        <value>1</value>
+        <value>2</value>
+        <value>3</value>
+        <ref bean="user"/>
+      </list>
+    </property>
+    <property name="properties">
+      <map>
+        <entry key="url" value="localhost"/>
+        <entry key="driver" value="mysql"/>
+        <entry key="user" value-ref="user"/>
+      </map>
+    </property>
+    <property name="set">
+      <set>
+        <value>hello</value>
+        <value>world</value>
+        <ref bean="user"/>
+      </set>
+    </property>
+  </bean>
+
+  <util:list id="list" list-class="java.util.ArrayList">
+    <value>hello</value>
+    <ref bean="user"/>
+  </util:list>
+
+  <util:map id="map" map-class="java.util.HashMap">
+    <entry key="name" value="zhangsan"/>
+    <entry key="user" value-ref="user"/>
+  </util:map>
+
+  <util:properties id="properties">
+    <prop key="name">zhangsan</prop>
+    <prop key="user">user</prop>
+  </util:properties>
+
+  <util:set id="set" set-class="java.util.HashSet">
+    <value>hello</value>
+    <ref bean="user"/>
+  </util:set>
+
+  <bean id="user"
+        class="org.example.beans.entity.User">
+    <property name="name" value="java"/>
+    <property name="age" value="18"/>
+  </bean>
+</beans>
