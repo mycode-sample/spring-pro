@@ -1,0 +1,31 @@
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+  <bean id="user"
+        class="org.example.beans.entity.User"/>
+  <bean id="company"
+        primary="true"
+        class="org.example.beans.entity.Company"/>
+  <bean id="companyPlus"
+        class="org.example.beans.entity.Company"/>
+  <bean id="school"
+        class="org.example.beans.education.School"/>
+
+  <bean id="byType"
+        lazy-init="true"
+        autowire="byType"
+        class="com.sheepfly.springpro.chapter3.section7.DemoBean"/>
+  <bean id="byName"
+        lazy-init="true"
+        autowire="byName"
+        class="com.sheepfly.springpro.chapter3.section7.DemoBean"/>
+  <bean id="constructor"
+        lazy-init="true"
+        autowire="constructor"
+        class="com.sheepfly.springpro.chapter3.section7.DemoBean"/>
+  <bean id="byName2"
+        lazy-init="true"
+        autowire="byName"
+        class="com.sheepfly.springpro.chapter3.section7.DemoBean"/>
+</beans>
