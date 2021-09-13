@@ -1,0 +1,31 @@
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans.xsd
+          http://www.springframework.org/schema/context
+          http://www.springframework.org/schema/context/spring-context.xsd"
+>
+  <context:annotation-config></context:annotation-config>
+  <bean id="userPlus"
+        class="com.sheepfly.springpro.chapter4.section3.UserPlus"
+        p:name="张三"
+        init-method="init"
+  />
+  <bean id="userPlus2"
+        class="com.sheepfly.springpro.chapter4.section3.UserPlus"
+        init-method="init"/>
+
+  <bean id="companyPlus"
+        class="com.sheepfly.springpro.chapter4.section3.CompanyPlus"/>
+  <bean id="companyPlus2"
+        class="com.sheepfly.springpro.chapter4.section3.CompanyPlus"
+        p:name="李四的公司"/>
+
+  <bean id="schoolPlus"
+        class="com.sheepfly.springpro.chapter4.section3.SchoolPlus"/>
+  <bean id="schoolPlus2"
+        class="com.sheepfly.springpro.chapter4.section3.SchoolPlus"
+        p:name="清华大学"/>
+</beans>
