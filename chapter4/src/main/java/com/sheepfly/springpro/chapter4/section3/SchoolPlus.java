@@ -3,6 +3,7 @@ package com.sheepfly.springpro.chapter4.section3;
 import org.example.beans.education.School;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
 public class SchoolPlus extends School {
     @PostConstruct
@@ -13,5 +14,11 @@ public class SchoolPlus extends School {
         } else {
             System.out.println("学校名称:" + super.getName());
         }
+    }
+
+    @PreDestroy
+    public void destroy() {
+        super.setName("end");
+        System.out.println("销毁完成 com.sheepfly.springpro.chapter4.section3.SchoolPlus.destroy");
     }
 }

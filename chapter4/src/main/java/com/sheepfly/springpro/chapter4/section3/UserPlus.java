@@ -12,4 +12,9 @@ public class UserPlus extends User {
             System.out.println("用户名:" + super.getName());
         }
     }
+
+    public void destroy() {
+        super.setName("end");
+        System.out.println("销毁完成 com.sheepfly.springpro.chapter4.section3.UserPlus.destroy");
+    }
 }

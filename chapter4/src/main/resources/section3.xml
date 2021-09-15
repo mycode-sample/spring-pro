@@ -7,15 +7,19 @@
           http://www.springframework.org/schema/context
           http://www.springframework.org/schema/context/spring-context.xsd"
 >
-  <context:annotation-config></context:annotation-config>
+  <context:annotation-config/>
+  <context:component-scan base-package="com.sheepfly.springpro.chapter4.section3"/>
   <bean id="userPlus"
         class="com.sheepfly.springpro.chapter4.section3.UserPlus"
         p:name="张三"
         init-method="init"
+        destroy-method="destroy"
   />
   <bean id="userPlus2"
         class="com.sheepfly.springpro.chapter4.section3.UserPlus"
-        init-method="init"/>
+        init-method="init"
+        destroy-method="destroy"
+  />
 
   <bean id="companyPlus"
         class="com.sheepfly.springpro.chapter4.section3.CompanyPlus"/>
