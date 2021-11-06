@@ -12,6 +12,7 @@
     <module>chapter2</module>
     <module>chapter3</module>
     <module>chapter4</module>
+    <module>chapter5</module>
   </modules>
 
   <packaging>pom</packaging>
@@ -47,6 +48,13 @@
       <groupId>org.springframework</groupId>
       <artifactId>spring-beans</artifactId>
       <version>5.3.6</version>
+    </dependency>
+
+    <!-- aop alliance -->
+    <dependency>
+      <groupId>aopalliance</groupId>
+      <artifactId>aopalliance</artifactId>
+      <version>1.0</version>
     </dependency>
 
     <!-- 单元测试 -->

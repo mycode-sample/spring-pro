@@ -19,10 +19,10 @@ public class MethodReplace {
         ApplicationContext ctx = new ClassPathXmlApplicationContext(path);
         DemoBean demoBean2 = ctx.getBean("bean", DemoBean.class);
         DemoBean demoBean3 = ctx.getBean("demoBean", DemoBean.class);
-        System.out.println("===");
+        System.out.println("======");
         demoBean2.display(user);
         demoBean2.display(company);
-        System.out.println("===");
+        System.out.println("======");
         demoBean3.display(user);
         demoBean3.display(company);
     }
