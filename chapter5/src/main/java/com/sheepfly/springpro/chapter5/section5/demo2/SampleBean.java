@@ -8,4 +8,18 @@ public class SampleBean {
     public void f() {
         System.out.println("调用f");
     }
+
+    public void fun() {
+        System.out.println("fun");
+    }
+
+    @AdviceRequired
+    public void fun(String s) {
+        System.out.println("fun:s");
+    }
+
+    public String fun(int i) {
+        System.out.println("fun:int");
+        return String.valueOf(i);
+    }
 }
