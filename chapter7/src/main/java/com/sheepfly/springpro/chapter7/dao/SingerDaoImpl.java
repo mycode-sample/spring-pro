@@ -24,7 +24,9 @@ public class SingerDaoImpl implements SingerDao {
     @Override
     @Transactional(readOnly = true)
     public List<Singer> findAll() {
-        return sessionFactory.getCurrentSession().createQuery("from Singer s").list();
+        String hql = "select s from Singer s";
+        // String hql = "from Singer s";
+        return sessionFactory.getCurrentSession().createQuery(hql).list();
     }
 
     @Override
