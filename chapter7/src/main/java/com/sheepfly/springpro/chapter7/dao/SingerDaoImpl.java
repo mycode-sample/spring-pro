@@ -52,6 +52,12 @@ public class SingerDaoImpl implements SingerDao {
     }
 
     @Override
+    public void saveOrUpdate(Singer singer) {
+        sessionFactory.getCurrentSession().saveOrUpdate(singer);
+        logger.info("save or update with id:" + singer.getId());
+    }
+
+    @Override
     public void delete(Singer singer) {
         sessionFactory.getCurrentSession().delete(singer);
         logger.info("Singer deleted with id: " + singer.getId());

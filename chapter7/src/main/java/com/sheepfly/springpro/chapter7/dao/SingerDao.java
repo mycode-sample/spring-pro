@@ -18,5 +18,7 @@ public interface SingerDao {
 
     Singer save(Singer singer);
 
+    void saveOrUpdate(Singer singer);
+
     void delete(Singer singer);
 }
