@@ -65,4 +65,18 @@ public class SingerDaoImplTest {
         singer.setBirthDate(new Date(l + 90000000));
         singerDao.saveOrUpdate(singer);
     }
+
+    @Test
+    public void testDelete() {
+        List<Singer> singerList = singerDao.findAll();
+        Singer singer = null;
+        long maxId = 0;
+        for (Singer ele : singerList) {
+            if (ele.getId() >= maxId) {
+                singer = ele;
+
+            }
+        }
+        singerDao.delete(singer);
+    }
 }
