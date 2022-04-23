@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Service
@@ -24,24 +25,26 @@ public class SingerServiceImpl implements SingerService {
     @Transactional(readOnly = true)
     @Override
     public List<Singer> queryAllSinger() {
-        return null;
+        return entityManager.createNamedQuery(ALL_SINGER_NATIVE_QUERY, Singer.class).getResultList();
     }
 
     @Override
     public List<Singer> findAll() {
-        return null;
+        return entityManager.createNamedQuery("Singer.findAll", Singer.class).getResultList();
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<Singer> findAllWithAlbum() {
-        return null;
+        return entityManager.createNamedQuery("Singer.findAllWithAlbum", Singer.class).getResultList();
     }
 
     @Transactional(readOnly = true)
     @Override
     public Singer findById(long id) {
-        return null;
+        TypedQuery<Singer> namedQuery = entityManager.createNamedQuery("Singer.findById", Singer.class);
+        namedQuery.setParameter("id", id);
+        return namedQuery.getSingleResult();
     }
 
     @Override

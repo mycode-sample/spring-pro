@@ -3,6 +3,7 @@ package com.sheepfly.springpro.chapter7.entity;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityResult;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -11,6 +12,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SqlResultSetMapping;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -28,6 +30,8 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Entity
 @Table(name = "singer")
 @NamedQueries({
+        @NamedQuery(name = "Singer.findAll",
+                query = "select s from Singer s"),
         @NamedQuery(name = "Singer.findById",
                 query = "select distinct s from Singer s " +
                         "left join fetch s.albums a " +
@@ -38,6 +42,7 @@ import static javax.persistence.GenerationType.IDENTITY;
                         "left join fetch s.albums a " +
                         "left join fetch s.instruments i")
 })
+@SqlResultSetMapping(name = "singleResult", entities = @EntityResult(entityClass = Singer.class))
 public class Singer implements Serializable {
 
     private Long id;
