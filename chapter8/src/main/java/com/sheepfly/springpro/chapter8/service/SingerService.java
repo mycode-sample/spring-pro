@@ -19,4 +19,6 @@ public interface SingerService {
 
     List<Singer> findAllByNativeQuery();
 
+    void displayAllSingerSummary();
+
 }

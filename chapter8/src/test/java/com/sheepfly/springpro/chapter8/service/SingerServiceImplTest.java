@@ -32,4 +32,9 @@ public class SingerServiceImplTest {
     public void testFindById() {
         System.out.println(singerService.findById(1));
     }
+
+    @Test
+    public void testDisplayAllSingerSummary() {
+        singerService.displayAllSingerSummary();
+    }
 }

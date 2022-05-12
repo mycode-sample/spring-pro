@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -61,5 +62,29 @@ public class SingerServiceImpl implements SingerService {
     @Override
     public List<Singer> findAllByNativeQuery() {
         return null;
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public void displayAllSingerSummary() {
+        String query = "select s.firstName, s.lastName, a.title from Singer s " +
+                "left join s.albums a " +
+                "where a.releaseDate = (select max ( a2.releaseDate )" +
+                "from Album a2 where a2.singer.id = s.id)";
+        List resultList = entityManager.createQuery(query).getResultList();
+        Iterator iterator = resultList.iterator();
+        int i = 0;
+        while (iterator.hasNext()) {
+            Object[] next = (Object[]) iterator.next();
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append("value:")
+                    .append(next[0])
+                    .append(",")
+                    .append(next[1])
+                    .append(",")
+                    .append(next[2]);
+            log.info(stringBuilder.toString());
+        }
+        log.info(String.valueOf(resultList.size()));
     }
 }
