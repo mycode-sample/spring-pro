@@ -1,6 +1,7 @@
 package com.sheepfly.springpro.chapter8.service;
 
 import com.sheepfly.springpro.chapter7.entity.Singer;
+import com.sheepfly.springpro.chapter8.pojo.SingerSummary;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -36,5 +37,11 @@ public class SingerServiceImplTest {
     @Test
     public void testDisplayAllSingerSummary() {
         singerService.displayAllSingerSummary();
+    }
+
+    @Test
+    public void testFindAllUsePojo() {
+        List<SingerSummary> list = singerService.findAllUsePojo();
+        System.out.println(list.size());
     }
 }

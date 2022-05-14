@@ -1,6 +1,7 @@
 package com.sheepfly.springpro.chapter8.service;
 
 import com.sheepfly.springpro.chapter7.entity.Singer;
+import com.sheepfly.springpro.chapter8.pojo.SingerSummary;
 
 import java.util.List;
 
@@ -21,4 +22,5 @@ public interface SingerService {
 
     void displayAllSingerSummary();
 
+    List<SingerSummary> findAllUsePojo();
 }

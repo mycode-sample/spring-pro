@@ -1,6 +1,7 @@
 package com.sheepfly.springpro.chapter8.service;
 
 import com.sheepfly.springpro.chapter7.entity.Singer;
+import com.sheepfly.springpro.chapter8.pojo.SingerSummary;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -86,5 +87,16 @@ public class SingerServiceImpl implements SingerService {
             log.info(stringBuilder.toString());
         }
         log.info(String.valueOf(resultList.size()));
+    }
+
+    @Override
+    public List<SingerSummary> findAllUsePojo() {
+        String jpql = "select new com.sheepfly.springpro.chapter8.pojo.SingerSummary(s.firstName, s.lastName, a.title)" +
+                "from Singer s " +
+                "left join s.albums a " +
+                "where a.releaseDate = (select max (a2.releaseDate)" +
+                "from Album a2 " +
+                "where a2.singer.id = s.id)";
+        return entityManager.createQuery(jpql, SingerSummary.class).getResultList();
     }
 }
