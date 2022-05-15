@@ -109,4 +109,10 @@ public class SingerServiceImplTest {
         List<Singer> list = singerService.findByCriteriaQuery("张", "三");
         list.forEach(System.out::println);
     }
+
+    @Test
+    public void testFindByFirstName() {
+        List<Singer> list = singerService.findByFirstName("张");
+        list.forEach(System.out::println);
+    }
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -30,6 +31,8 @@ public class SingerServiceImpl implements SingerService {
 
     @PersistenceContext
     private EntityManager entityManager;
+    @Resource(name = "singerRepositoryService")
+    private SingerRepositoryService singerRepositoryService;
 
     @Transactional(readOnly = true)
     @Override
@@ -145,5 +148,10 @@ public class SingerServiceImpl implements SingerService {
         List<Singer> allWithAlbum = findAllWithAlbum();
         allWithAlbum.sort(Comparator.comparing(Singer::getId));
         return update(allWithAlbum.get(allWithAlbum.size() - 1));
+    }
+
+    @Override
+    public List<Singer> findByFirstName(String firstName) {
+        return singerRepositoryService.findByFirstName(firstName);
     }
 }

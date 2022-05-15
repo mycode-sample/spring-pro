@@ -29,4 +29,6 @@ public interface SingerService {
     List<SingerSummary> findAllUsePojo();
 
     Singer findSingerWithMaxId();
+
+    List<Singer> findByFirstName(String firstName);
 }
