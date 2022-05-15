@@ -16,6 +16,8 @@ public interface SingerService {
 
     Singer save(Singer singer);
 
+    Singer update(Singer singer);
+
     void delete(Singer singer);
 
     List<Singer> findAllByNativeQuery();
@@ -23,4 +25,6 @@ public interface SingerService {
     void displayAllSingerSummary();
 
     List<SingerSummary> findAllUsePojo();
+
+    Singer findSingerWithMaxId();
 }

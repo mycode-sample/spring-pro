@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -51,12 +52,25 @@ public class SingerServiceImpl implements SingerService {
 
     @Override
     public Singer save(Singer singer) {
-        return null;
+        if (singer.getId() == null) {
+            log.info("新增对象：" + singer);
+            entityManager.persist(singer);
+        } else {
+            log.info("更新对象:" + singer);
+            entityManager.merge(singer);
+        }
+        return singer;
+    }
+
+    @Override
+    public Singer update(Singer singer) {
+        return entityManager.merge(singer);
     }
 
     @Override
     public void delete(Singer singer) {
-
+        Singer mergedSinger = entityManager.merge(singer);
+        entityManager.remove(mergedSinger);
     }
 
     @Transactional(readOnly = true)
@@ -68,22 +82,14 @@ public class SingerServiceImpl implements SingerService {
     @Transactional(readOnly = true)
     @Override
     public void displayAllSingerSummary() {
-        String query = "select s.firstName, s.lastName, a.title from Singer s " +
-                "left join s.albums a " +
-                "where a.releaseDate = (select max ( a2.releaseDate )" +
-                "from Album a2 where a2.singer.id = s.id)";
+        String query = "select s.firstName, s.lastName, a.title from Singer s " + "left join s.albums a " + "where a.releaseDate = (select max ( a2.releaseDate )" + "from Album a2 where a2.singer.id = s.id)";
         List resultList = entityManager.createQuery(query).getResultList();
         Iterator iterator = resultList.iterator();
         int i = 0;
         while (iterator.hasNext()) {
             Object[] next = (Object[]) iterator.next();
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append("value:")
-                    .append(next[0])
-                    .append(",")
-                    .append(next[1])
-                    .append(",")
-                    .append(next[2]);
+            stringBuilder.append("value:").append(next[0]).append(",").append(next[1]).append(",").append(next[2]);
             log.info(stringBuilder.toString());
         }
         log.info(String.valueOf(resultList.size()));
@@ -91,12 +97,14 @@ public class SingerServiceImpl implements SingerService {
 
     @Override
     public List<SingerSummary> findAllUsePojo() {
-        String jpql = "select new com.sheepfly.springpro.chapter8.pojo.SingerSummary(s.firstName, s.lastName, a.title)" +
-                "from Singer s " +
-                "left join s.albums a " +
-                "where a.releaseDate = (select max (a2.releaseDate)" +
-                "from Album a2 " +
-                "where a2.singer.id = s.id)";
+        String jpql = "select new com.sheepfly.springpro.chapter8.pojo.SingerSummary(s.firstName, s.lastName, a.title)" + "from Singer s " + "left join s.albums a " + "where a.releaseDate = (select max (a2.releaseDate)" + "from Album a2 " + "where a2.singer.id = s.id)";
         return entityManager.createQuery(jpql, SingerSummary.class).getResultList();
+    }
+
+    @Override
+    public Singer findSingerWithMaxId() {
+        List<Singer> allWithAlbum = findAllWithAlbum();
+        allWithAlbum.sort(Comparator.comparing(Singer::getId));
+        return update(allWithAlbum.get(allWithAlbum.size() - 1));
     }
 }
