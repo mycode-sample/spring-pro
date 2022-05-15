@@ -97,4 +97,10 @@ public class SingerServiceImplTest {
     public void testDelete() {
         singerService.delete(singerService.findSingerWithMaxId());
     }
+
+    @Test
+    public void testFindAllByNativeQuery() {
+        List<Singer> singerList = singerService.findAllByNativeQuery();
+        System.out.println(singerList.size());
+    }
 }
