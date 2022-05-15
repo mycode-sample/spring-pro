@@ -35,22 +35,31 @@ public class SingerServiceImpl implements SingerService {
     @Override
     public List<Singer> findByCriteriaQuery(String firstName, String lastName) {
         log.info(firstName + lastName);
+        // 1.获取条件查询实例
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        // 2.创建类型化查询
         CriteriaQuery<Singer> criteriaQuery = criteriaBuilder.createQuery(Singer.class);
+        // 3.调用from来生成查询用的根对象。根对象构成查询中路径表达式的基础
         Root<Singer> singerRoot = criteriaQuery.from(Singer.class);
+        // 4.调用fetch方法进行关联，相当于在查询中使用left join
         singerRoot.fetch(Singer_.albums, JoinType.LEFT);
         singerRoot.fetch(Singer_.instruments, JoinType.LEFT);
+        // 5.传入根对象作为结果类型，使用distinct来去重
         criteriaQuery.select(singerRoot).distinct(true);
+        // 6.构建Predicate实例，并使用条件方法来增加查询时的限制条件
         Predicate predicate = criteriaBuilder.conjunction();
         if (firstName != null) {
             Predicate p = criteriaBuilder.equal(singerRoot.get(Singer_.firstName), firstName);
+            // 合并条件，也可以时or或其他关键字
             predicate = criteriaBuilder.and(predicate, p);
         }
         if (lastName != null) {
             Predicate p = criteriaBuilder.equal(singerRoot.get(Singer_.lastName), lastName);
             predicate = criteriaBuilder.and(predicate, p);
         }
+        // 7.Predicate构造完成后，作为where子句传给查询。
         criteriaQuery.where(predicate);
+        // 8.构造查询并返回结果
         return entityManager.createQuery(criteriaQuery).getResultList();
     }
 
