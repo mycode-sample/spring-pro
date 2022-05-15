@@ -6,6 +6,8 @@ import com.sheepfly.springpro.chapter8.pojo.SingerSummary;
 import java.util.List;
 
 public interface SingerService {
+    List<Singer> findByCriteriaQuery(String firstName, String lastName);
+
     List<Singer> queryAllSinger();
 
     List<Singer> findAll();

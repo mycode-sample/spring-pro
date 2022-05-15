@@ -103,4 +103,10 @@ public class SingerServiceImplTest {
         List<Singer> singerList = singerService.findAllByNativeQuery();
         System.out.println(singerList.size());
     }
+
+    @Test
+    public void testFindByCriteriaQuery() {
+        List<Singer> list = singerService.findByCriteriaQuery("张", "三");
+        list.forEach(System.out::println);
+    }
 }

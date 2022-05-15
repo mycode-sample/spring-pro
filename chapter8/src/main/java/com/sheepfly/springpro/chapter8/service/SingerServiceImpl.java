@@ -1,6 +1,7 @@
 package com.sheepfly.springpro.chapter8.service;
 
 import com.sheepfly.springpro.chapter7.entity.Singer;
+import com.sheepfly.springpro.chapter7.entity.Singer_;
 import com.sheepfly.springpro.chapter8.pojo.SingerSummary;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +12,11 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.JoinType;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
@@ -24,6 +30,29 @@ public class SingerServiceImpl implements SingerService {
 
     @PersistenceContext
     private EntityManager entityManager;
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<Singer> findByCriteriaQuery(String firstName, String lastName) {
+        log.info(firstName + lastName);
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Singer> criteriaQuery = criteriaBuilder.createQuery(Singer.class);
+        Root<Singer> singerRoot = criteriaQuery.from(Singer.class);
+        singerRoot.fetch(Singer_.albums, JoinType.LEFT);
+        singerRoot.fetch(Singer_.instruments, JoinType.LEFT);
+        criteriaQuery.select(singerRoot).distinct(true);
+        Predicate predicate = criteriaBuilder.conjunction();
+        if (firstName != null) {
+            Predicate p = criteriaBuilder.equal(singerRoot.get(Singer_.firstName), firstName);
+            predicate = criteriaBuilder.and(predicate, p);
+        }
+        if (lastName != null) {
+            Predicate p = criteriaBuilder.equal(singerRoot.get(Singer_.lastName), lastName);
+            predicate = criteriaBuilder.and(predicate, p);
+        }
+        criteriaQuery.where(predicate);
+        return entityManager.createQuery(criteriaQuery).getResultList();
+    }
 
     @Transactional(readOnly = true)
     @Override
