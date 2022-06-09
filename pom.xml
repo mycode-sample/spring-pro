@@ -31,6 +31,11 @@
     <!-- spring依赖 -->
     <dependency>
       <groupId>org.springframework</groupId>
+      <artifactId>spring-aspects</artifactId>
+      <version>${version.spring}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
       <artifactId>spring-core</artifactId>
       <version>${version.spring}</version>
     </dependency>
