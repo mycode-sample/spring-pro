@@ -6,9 +6,9 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class AuditorAwareBean implements AuditorAware<String> {
+public class AuditorAwareBean2 implements AuditorAware<String> {
     @Override
     public Optional<String> getCurrentAuditor() {
-        return Optional.of("管理员" + System.currentTimeMillis());
+        return Optional.of("总监" + System.currentTimeMillis());
     }
 }

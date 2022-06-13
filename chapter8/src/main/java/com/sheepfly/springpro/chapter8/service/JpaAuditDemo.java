@@ -1,27 +1,23 @@
 package com.sheepfly.springpro.chapter8.service;
 
 import com.sheepfly.springpro.chapter7.entity.SingerAudit;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.List;
 
-@RunWith(SpringRunner.class)
-@ContextConfiguration("classpath:jpa.xml")
-public class SingerAuditServiceImplTest {
-    @Autowired
+@Component
+public class JpaAuditDemo {
+    @Resource(name = "singerAuditRepository")
+    private SingerAuditRepository singerAuditRepository;
+    @Resource(name = "singerAuditServiceImpl")
     private SingerAuditService singerAuditService;
 
-    @Test
-    public void testFindAll() {
+    public void runDemo() {
         List<SingerAudit> list = singerAuditService.findAll();
         list.forEach(System.out::println);
         SingerAudit singerAudit = list.get(0);
         singerAudit.setFirstName("张三" + System.currentTimeMillis());
         singerAuditService.save(singerAudit);
-        System.out.println(singerAudit);
     }
 }
