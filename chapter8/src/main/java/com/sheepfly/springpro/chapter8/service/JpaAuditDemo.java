@@ -8,8 +8,6 @@ import java.util.List;
 
 @Component
 public class JpaAuditDemo {
-    @Resource(name = "singerAuditRepository")
-    private SingerAuditRepository singerAuditRepository;
     @Resource(name = "singerAuditServiceImpl")
     private SingerAuditService singerAuditService;
 
