@@ -1,5 +1,7 @@
 package com.sheepfly.springpro.chapter7.entity;
 
+import org.hibernate.envers.Audited;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +15,7 @@ import java.util.Date;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
+@Audited
 @Table(name = "singer_audit")
 public class SingerAudit extends AuditableEntity<SingerAudit> {
 
@@ -66,11 +69,7 @@ public class SingerAudit extends AuditableEntity<SingerAudit> {
 
     @Override
     public String toString() {
-        return "Singer - Id: " + id + ", First name: " + firstName
-                + ", Last name: " + lastName + ", Birthday: " + birthDate
-                + ", Created by: " + createdBy + ", Create date: " + createdDate
-                + ", Modified by: " + lastModifiedBy + ", Modified date: "
-                + lastModifiedDate;
+        return "Singer - Id: " + id + ", First name: " + firstName + ", Last name: " + lastName + ", Birthday: " + birthDate + ", Created by: " + createdBy + ", Create date: " + createdDate + ", Modified by: " + lastModifiedBy + ", Modified date: " + lastModifiedDate;
     }
 }
 

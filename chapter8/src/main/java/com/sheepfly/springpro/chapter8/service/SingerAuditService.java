@@ -8,4 +8,6 @@ public interface SingerAuditService {
     List<SingerAudit> findAll();
 
     SingerAudit save(SingerAudit singerAudit);
+
+    SingerAudit findByRevision(long id, int revision);
 }

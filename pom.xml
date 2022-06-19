@@ -172,7 +172,12 @@
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-jpamodelgen</artifactId>
-      <version>5.2.10.Final</version>
+      <version>${version.hibernate}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-envers</artifactId>
+      <version>${version.hibernate}</version>
     </dependency>
 
     <!-- 常用bean -->

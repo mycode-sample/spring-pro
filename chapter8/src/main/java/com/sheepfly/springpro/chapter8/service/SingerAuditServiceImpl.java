@@ -26,4 +26,9 @@ public class SingerAuditServiceImpl implements SingerAuditService {
     public SingerAudit save(SingerAudit singerAudit) {
         return singerAuditRepository.save(singerAudit);
     }
+
+    @Override
+    public SingerAudit findByRevision(long id, int revision) {
+        return null;
+    }
 }

@@ -17,5 +17,9 @@ public class JpaAuditDemo {
         SingerAudit singerAudit = list.get(0);
         singerAudit.setFirstName("张三" + System.currentTimeMillis());
         singerAuditService.save(singerAudit);
+        // list = singerAuditService.findAll();
+        // singerAudit = list.get(0);
+        // singerAudit.setFirstName("李四" + System.currentTimeMillis());
+        // singerAuditService.save(singerAudit);
     }
 }
