@@ -72,6 +72,7 @@ public class SingerServiceImpl implements SingerService {
         return entityManager.createNamedQuery(ALL_SINGER_NATIVE_QUERY, Singer.class).getResultList();
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<Singer> findAll() {
         return entityManager.createNamedQuery("Singer.findAll", Singer.class).getResultList();
