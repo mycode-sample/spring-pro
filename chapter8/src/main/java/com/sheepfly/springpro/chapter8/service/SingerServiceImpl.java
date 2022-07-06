@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
@@ -154,5 +155,12 @@ public class SingerServiceImpl implements SingerService {
     @Override
     public List<Singer> findByFirstName(String firstName) {
         return singerRepositoryService.findByFirstName(firstName);
+    }
+
+
+    @Transactional(propagation = Propagation.NEVER)
+    @Override
+    public Long countAllSingers() {
+        return singerRepositoryService.countAllSingers();
     }
 }

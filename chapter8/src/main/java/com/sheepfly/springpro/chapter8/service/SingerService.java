@@ -31,4 +31,6 @@ public interface SingerService {
     Singer findSingerWithMaxId();
 
     List<Singer> findByFirstName(String firstName);
+
+    Long countAllSingers();
 }
