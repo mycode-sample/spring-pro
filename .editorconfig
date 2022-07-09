@@ -1,0 +1,15 @@
+root = true
+
+[*]
+trim_trailing_whitespace = true
+indent_style = space
+end_of_line = crlf
+insert_final_newline = true
+
+[*.java]
+indent_size = 4
+continuation_indent_size = 8
+
+[*.xml]
+indent_size = 2
+continuation_indent_size = 4
