@@ -35,7 +35,6 @@ public class SingerServiceImpl implements SingerService {
     @Resource(name = "singerRepositoryService")
     private SingerRepositoryService singerRepositoryService;
 
-    @Transactional(readOnly = true)
     @Override
     public List<Singer> findByCriteriaQuery(String firstName, String lastName) {
         log.info(firstName + lastName);
@@ -67,25 +66,21 @@ public class SingerServiceImpl implements SingerService {
         return entityManager.createQuery(criteriaQuery).getResultList();
     }
 
-    @Transactional(readOnly = true)
     @Override
     public List<Singer> queryAllSinger() {
         return entityManager.createNamedQuery(ALL_SINGER_NATIVE_QUERY, Singer.class).getResultList();
     }
 
-    @Transactional(readOnly = true)
     @Override
     public List<Singer> findAll() {
         return entityManager.createNamedQuery("Singer.findAll", Singer.class).getResultList();
     }
 
-    @Transactional(readOnly = true)
     @Override
     public List<Singer> findAllWithAlbum() {
         return entityManager.createNamedQuery("Singer.findAllWithAlbum", Singer.class).getResultList();
     }
 
-    @Transactional(readOnly = true)
     @Override
     public Singer findById(long id) {
         TypedQuery<Singer> namedQuery = entityManager.createNamedQuery("Singer.findById", Singer.class);
@@ -116,14 +111,13 @@ public class SingerServiceImpl implements SingerService {
         entityManager.remove(mergedSinger);
     }
 
-    @Transactional(readOnly = true)
+
     @Override
     public List<Singer> findAllByNativeQuery() {
         String sql = "select * from singer";
         return entityManager.createNativeQuery(sql, Singer.class).getResultList();
     }
 
-    @Transactional(readOnly = true)
     @Override
     public void displayAllSingerSummary() {
         String query = "select s.firstName, s.lastName, a.title from Singer s " + "left join s.albums a " + "where a.releaseDate = (select max ( a2.releaseDate )" + "from Album a2 where a2.singer.id = s.id)";

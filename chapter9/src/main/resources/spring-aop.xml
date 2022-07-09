@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://www.springframework.org/schema/context
+         https://www.springframework.org/schema/context/spring-context.xsd
+         http://www.springframework.org/schema/data/jpa
+         http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+         http://www.springframework.org/schema/tx
+         http://www.springframework.org/schema/tx/spring-tx.xsd
+         http://www.springframework.org/schema/aop
+         http://www.springframework.org/schema/aop/spring-aop.xsd
+         http://www.springframework.org/schema/util
+         http://www.springframework.org/schema/util/spring-util.xsd"
+>
+  <context:component-scan
+      base-package="com.sheepfly.springpro.chapter7,com.sheepfly.springpro.chapter8,com.sheepfly.springpro.chapter9"/>
+  <bean id="dataSource"
+      class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+    <property name="url" value="jdbc:mysql://localhost:3306/SPRING_PRO"/>
+    <property name="username" value="root"/>
+    <property name="password" value="123456"/>
+  </bean>
+
+  <util:properties id="hibernateProperties">
+    <prop key="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</prop>
+    <prop key="hibernate.max_fetch_depth">3</prop>
+    <prop key="hibernate.jdbc.fetch_size">50</prop>
+    <prop key="hibernate.jdbc.batch_size">10</prop>
+    <prop key="hibernate.format_sql">true</prop>
+    <prop key="hibernate.use_sql_comments">true</prop>
+    <prop key="hibernate.show_sql">true</prop>
+  </util:properties>
+
+  <bean id="sessionFactory"
+      class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+    <property name="dataSource" ref="dataSource"/>
+    <property name="packagesToScan" value="com.sheepfly.springpro.chapter7.entity"/>
+    <property name="hibernateProperties" ref="hibernateProperties"/>
+  </bean>
+
+  <bean id="transactionManager"
+      class="org.springframework.orm.jpa.JpaTransactionManager">
+    <property name="entityManagerFactory" ref="sessionFactory"/>
+  </bean>
+
+  <jpa:repositories
+      base-package="com.sheepfly.springpro.chapter7,com.sheepfly.springpro.chapter8,com.sheepfly.springpro.chapter9"
+      entity-manager-factory-ref="sessionFactory"
+      transaction-manager-ref="transactionManager"/>
+
+  <tx:advice id="txAdvice">
+    <tx:attributes>
+      <tx:method name="find*" read-only="true"/>
+      <tx:method name="count*" propagation="NEVER"/>
+      <tx:method name="*"/>
+    </tx:attributes>
+  </tx:advice>
+
+  <aop:config>
+    <aop:pointcut id="txPoint"
+        expression="execution(* com.sheepfly.springpro.chapter8.service.*.*(..))"/>
+    <aop:advisor pointcut-ref="txPoint" advice-ref="txAdvice"/>
+  </aop:config>
+</beans>
