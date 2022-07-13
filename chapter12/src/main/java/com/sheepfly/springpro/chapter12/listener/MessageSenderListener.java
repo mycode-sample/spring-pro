@@ -11,7 +11,7 @@ public class MessageSenderListener implements Runnable {
     private long sleep;
 
     public static String format() {
-        SimpleDateFormat format = new SimpleDateFormat();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.sss");
         return format.format(System.currentTimeMillis());
     }
 

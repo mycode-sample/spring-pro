@@ -15,7 +15,7 @@ public class MessageReceiverListener implements Runnable {
             try {
                 Message message = this.messageConsumer.receive();
                 TextMessage textMessage = (TextMessage) message;
-                System.out.println("message:" + textMessage.getText());
+                System.out.println(MessageSenderListener.format() + " receive message:\r\n" + textMessage.getText());
                 Thread.sleep(sleep);
             } catch (JMSException e) {
                 e.printStackTrace();
