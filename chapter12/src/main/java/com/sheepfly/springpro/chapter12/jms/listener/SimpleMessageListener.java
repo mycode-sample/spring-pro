@@ -1,4 +1,4 @@
-package com.sheepfly.springpro.chapter12.listener;
+package com.sheepfly.springpro.chapter12.jms.listener;
 
 import org.springframework.stereotype.Component;
 

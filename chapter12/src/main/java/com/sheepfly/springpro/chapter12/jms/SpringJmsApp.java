@@ -1,4 +1,4 @@
-package com.sheepfly.springpro.chapter12;
+package com.sheepfly.springpro.chapter12.jms;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

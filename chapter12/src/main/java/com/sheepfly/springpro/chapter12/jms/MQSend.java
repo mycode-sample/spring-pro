@@ -1,6 +1,6 @@
-package com.sheepfly.springpro.chapter12;
+package com.sheepfly.springpro.chapter12.jms;
 
-import com.sheepfly.springpro.chapter12.listener.MessageSenderListener;
+import com.sheepfly.springpro.chapter12.jms.listener.MessageSenderListener;
 import org.apache.activemq.ActiveMQConnectionFactory;
 
 import javax.jms.Connection;
