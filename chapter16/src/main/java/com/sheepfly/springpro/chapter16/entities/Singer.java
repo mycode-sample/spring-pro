@@ -26,11 +26,11 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "spring_pro.singer")
+@SingerChecker
 public class Singer implements Serializable {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "ID")
-    @SingerChecker
     private Long id;
 
     @Version

@@ -41,5 +41,23 @@ public class ValidatorApp {
             Path path = ele.getPropertyPath();
             log.info(path + ": " + ele.getInvalidValue() + ", " + ele.getMessage());
         });
+        User user = new User();
+        Set<ConstraintViolation<User>> list2 = validator.validate(user);
+        list2.forEach(ele -> {
+            Path path = ele.getPropertyPath();
+            log.info(path + ": " + ele.getInvalidValue() + ", " + ele.getMessage());
+        });
+        user.setAge(10);
+        list2 = validator.validate(user);
+        list2.forEach(ele -> {
+            Path path = ele.getPropertyPath();
+            log.info(path + ": " + ele.getInvalidValue() + ", " + ele.getMessage());
+        });
+        user.setAge(20);
+        list2 = validator.validate(user);
+        list2.forEach(ele -> {
+            Path path = ele.getPropertyPath();
+            log.info(path + ": " + ele.getInvalidValue() + ", " + ele.getMessage());
+        });
     }
 }
