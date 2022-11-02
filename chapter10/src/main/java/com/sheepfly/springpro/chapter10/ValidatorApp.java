@@ -1,5 +1,6 @@
 package com.sheepfly.springpro.chapter10;
 
+import com.sheepfly.springpro.chapter10.bean.User;
 import com.sheepfly.springpro.chapter10.validator.SingerValidator;
 import com.sheepfly.springpro.chapter16.entities.Singer;
 import org.slf4j.Logger;

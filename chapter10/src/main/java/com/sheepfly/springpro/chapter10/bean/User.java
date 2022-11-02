@@ -1,4 +1,4 @@
-package com.sheepfly.springpro.chapter10;
+package com.sheepfly.springpro.chapter10.bean;
 
 import javax.validation.constraints.AssertTrue;
 
