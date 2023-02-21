@@ -20,4 +20,24 @@
       </list>
     </property>
   </bean>
+
+  <bean id="person"
+      class="com.sheepfly.springpro.chapter10.bean.Person">
+    <property name="username" value="张三"/>
+    <property name="age" value="12"/>
+    <property name="gender" value="男"/>
+  </bean>
+
+  <bean id="conversionServiceFactoryBean"
+      class="org.springframework.context.support.ConversionServiceFactoryBean">
+    <property name="converters">
+      <set value-type="org.springframework.core.convert.converter.Converter">
+        <bean id="userConvert" class="com.sheepfly.springpro.chapter10.convert.UserConvert"/>
+      </set>
+    </property>
+  </bean>
+
+  <bean id="company" class="com.sheepfly.springpro.chapter10.bean.Company">
+    <property name="person" ref="person"/>
+  </bean>
 </beans>
